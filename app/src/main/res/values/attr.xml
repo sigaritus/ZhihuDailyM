@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="textColorCustomized" format="color" />
+    <attr name="viewBackgroundCustomized" format="color" />
+    <attr name="layoutBackgroundCustomized" format="color" />
+    <attr name="toolbarBackgroundCustomized" format="color" />
+    <attr name="dividerColorCustomized" format="color" />
+    <attr name="fabColorCustomized" format="color" />
+    <attr name="textColorWhiteCustomized" format="color" />
+    <attr name="navigationBarColorCustomized" format="color" />
+
+
+</resources>

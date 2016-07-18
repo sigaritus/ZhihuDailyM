@@ -1,0 +1,59 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.FullScreen" parent="AppTheme.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="DayTheme" parent="AppTheme.NoActionBar">
+        <item name="textColorCustomized">#525252</item>
+        <item name="viewBackgroundCustomized">#f7f7f7</item>
+        <item name="layoutBackgroundCustomized">#f7f7f7</item>
+        <item name="toolbarBackgroundCustomized">@color/colorAccent</item>
+        <item name="dividerColorCustomized">#dddddd</item>
+        <item name="fabColorCustomized">@color/colorAccent</item>
+        <item name="textColorWhiteCustomized">#f7f7f7</item>
+        <item name="navigationBarColorCustomized">@color/colorPrimary</item>
+    </style>
+
+    <style name="NightTheme" parent="AppTheme.NoActionBar">
+        <item name="textColorCustomized">#979d9f</item>
+        <item name="viewBackgroundCustomized">#37474f</item>
+        <item name="layoutBackgroundCustomized">#212b30</item>
+        <item name="toolbarBackgroundCustomized">#263238</item>
+        <item name="dividerColorCustomized">#3f484d</item>
+        <item name="fabColorCustomized">#546e7a</item>
+        <item name="textColorWhiteCustomized">#979d9f</item>
+        <item name="navigationBarColorCustomized">#212b30</item>
+    </style>
+
+    <style name="Widget.CardContent" parent="android:Widget">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingBottom">24dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+</resources>
