@@ -20,4 +20,6 @@
     <dimen name="elevation_tabs">4dp</dimen>
     <dimen name="elevation_fab">8dp</dimen>
 
+    <dimen name="hot_list_width">150dp</dimen>
+
 </resources>

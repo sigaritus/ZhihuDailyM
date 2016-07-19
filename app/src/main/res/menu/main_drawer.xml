@@ -22,6 +22,7 @@
             android:id="@+id/nav_offline"
             android:icon="@drawable/ic_offline"
             android:title="@string/nav_offline" />
+
     </group>
 
     <item android:title="@string/other">

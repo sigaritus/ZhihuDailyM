@@ -17,6 +17,9 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.sigaritus.swu.zhihudailym.R;
+import com.sigaritus.swu.zhihudailym.fragment.HotStoryFragment;
+import com.sigaritus.swu.zhihudailym.fragment.LatestStoryFragment;
+import com.sigaritus.swu.zhihudailym.util.ToastUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        fragmentManager = getSupportFragmentManager();
         initViews();
         if (savedInstanceState==null)
             showHome();
@@ -72,18 +76,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void selectDrawerItem(MenuItem menuItem) {
         boolean specialToolbarBehaviour = false;
-        Class fragmentClass;
+
+        Class fragmentClass = HotStoryFragment.class;
 
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
-
+                ToastUtils.showShort("home");
+                fragmentClass = LatestStoryFragment.class;
                 break;
             case R.id.nav_theme_post:
 
                 specialToolbarBehaviour = true;
                 break;
             case R.id.nav_hot_post:
-
+                fragmentClass = HotStoryFragment.class;
                 break;
             case R.id.nav_history:
 
@@ -99,12 +105,12 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             default:
-
+                fragmentClass = HotStoryFragment.class;
                 break;
         }
 
         try {
-            Fragment fragment = null;
+            Fragment fragment = (Fragment) fragmentClass.newInstance();
             fragmentManager.beginTransaction().replace(R.id.main_container, fragment).commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -142,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         mActionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
-
 
 
 

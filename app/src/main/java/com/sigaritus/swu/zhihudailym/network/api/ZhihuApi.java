@@ -1,6 +1,10 @@
 package com.sigaritus.swu.zhihudailym.network.api;
 
+import com.sigaritus.swu.zhihudailym.bean.ZhihuHotResult;
+import com.sigaritus.swu.zhihudailym.bean.ZhihuHotStory;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuLatestResult;
+
+import java.util.List;
 
 import retrofit2.http.GET;
 import rx.Observable;
@@ -31,10 +35,11 @@ public interface ZhihuApi {
 
     String SHORT_COMMENTS ="story/%1$s/short-comments";
 
-    @GET("/news/latest")
+    @GET("news/latest")
     Observable<ZhihuLatestResult> getLatest();
 
-
+    @GET("news/hot")
+    Observable<ZhihuHotResult> getHotStory();
 
 
 }
