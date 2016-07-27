@@ -1,5 +1,6 @@
 package com.sigaritus.swu.zhihudailym.network.api;
 
+import com.sigaritus.swu.zhihudailym.bean.ZhihuDetailStory;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuHotResult;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuHotStory;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuLatestResult;
@@ -7,6 +8,7 @@ import com.sigaritus.swu.zhihudailym.bean.ZhihuLatestResult;
 import java.util.List;
 
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
@@ -41,5 +43,7 @@ public interface ZhihuApi {
     @GET("news/hot")
     Observable<ZhihuHotResult> getHotStory();
 
+    @GET("news/{id}")
+    Observable<ZhihuDetailStory> getDetailStory(@Path("id") String id);
 
 }

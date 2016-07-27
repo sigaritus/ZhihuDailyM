@@ -19,9 +19,25 @@ import butterknife.ButterKnife;
 /**
  * Created by Administrator on 2016/7/19.
  */
-public class HotStoryListAdapter extends RecyclerView.Adapter {
+public class HotStoryListAdapter extends RecyclerView.Adapter implements View.OnClickListener{
 
     List<ZhihuHotStory> hotStories;
+    private OnRecyclerViewListener onRecyclerViewListener;
+
+    @Override
+    public void onClick(View view) {
+        if (onRecyclerViewListener!=null)
+            onRecyclerViewListener.onClick(view,view.getTag()+"");
+    }
+
+
+    public interface OnRecyclerViewListener {
+        void onClick(View v,String data);
+    }
+
+    public void setOnRecyclerViewListener(OnRecyclerViewListener onRecyclerViewListener) {
+        this.onRecyclerViewListener = onRecyclerViewListener;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,6 +54,8 @@ public class HotStoryListAdapter extends RecyclerView.Adapter {
         ZhihuHotStory item = hotStories.get(position);
         Glide.with(holder.itemView.getContext()).load(item.getThumbnail()).into(viewHolder.hotStoryThumbnail);
         viewHolder.hotStoryTitle.setText(item.getTitle());
+        viewHolder.itemView.setTag(item.getNews_id());
+        viewHolder.itemView.setOnClickListener(this);
     }
 
     @Override

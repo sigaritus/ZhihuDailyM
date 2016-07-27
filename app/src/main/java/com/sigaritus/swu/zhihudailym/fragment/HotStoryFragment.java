@@ -1,6 +1,7 @@
 package com.sigaritus.swu.zhihudailym.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,9 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sigaritus.swu.zhihudailym.R;
+import com.sigaritus.swu.zhihudailym.activity.StoryDetailActicity;
+import com.sigaritus.swu.zhihudailym.bean.ZhihuDetailStory;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuHotResult;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuHotStory;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuLatestResult;
+import com.sigaritus.swu.zhihudailym.bean.ZhihuTopStory;
 import com.sigaritus.swu.zhihudailym.fragment.adapter.HotStoryListAdapter;
 import com.sigaritus.swu.zhihudailym.network.Network;
 import com.sigaritus.swu.zhihudailym.util.ToastUtils;
@@ -75,7 +79,7 @@ public class HotStoryFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_hot_story, container, false);
@@ -84,6 +88,15 @@ public class HotStoryFragment extends BaseFragment {
         hotStoryList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         hotStoryList.setAdapter(adapter);
+
+        adapter.setOnRecyclerViewListener(new HotStoryListAdapter.OnRecyclerViewListener() {
+            @Override
+            public void onClick(View v, String data) {
+                Intent intent = new Intent(getContext(), StoryDetailActicity.class);
+                intent.putExtra("id",data);
+                startActivity(intent);
+            }
+        });
 
         onLoad();
 
