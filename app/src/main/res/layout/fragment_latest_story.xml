@@ -1,13 +1,23 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.sigaritus.swu.zhihudailym.fragment.LatestStoryFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/latest_story_list"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
+        android:id="@+id/top_story_header"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal|top">
+        <com.daimajia.slider.library.SliderLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/story_slider"
+            android:layout_width="match_parent"
+            android:layout_height="175dp" />
+    </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
 </FrameLayout>

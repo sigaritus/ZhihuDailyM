@@ -38,7 +38,7 @@ public interface ZhihuApi {
     String SHORT_COMMENTS ="story/%1$s/short-comments";
 
     @GET("news/latest")
-    Observable<ZhihuLatestResult> getLatest();
+    Observable<ZhihuLatestResult> getLatestStory();
 
     @GET("news/hot")
     Observable<ZhihuHotResult> getHotStory();

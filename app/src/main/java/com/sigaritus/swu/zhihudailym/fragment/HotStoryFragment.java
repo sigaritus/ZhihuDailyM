@@ -19,6 +19,7 @@ import com.sigaritus.swu.zhihudailym.bean.ZhihuHotResult;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuHotStory;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuLatestResult;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuTopStory;
+import com.sigaritus.swu.zhihudailym.fragment.adapter.BaseRecyclerAdapter;
 import com.sigaritus.swu.zhihudailym.fragment.adapter.HotStoryListAdapter;
 import com.sigaritus.swu.zhihudailym.network.Network;
 import com.sigaritus.swu.zhihudailym.util.ToastUtils;
@@ -89,7 +90,7 @@ public class HotStoryFragment extends BaseFragment {
 
         hotStoryList.setAdapter(adapter);
 
-        adapter.setOnRecyclerViewListener(new HotStoryListAdapter.OnRecyclerViewListener() {
+        adapter.setOnRecyclerViewListener(new BaseRecyclerAdapter.OnRecyclerItemClickListener() {
             @Override
             public void onClick(View v, String data) {
                 Intent intent = new Intent(getContext(), StoryDetailActicity.class);

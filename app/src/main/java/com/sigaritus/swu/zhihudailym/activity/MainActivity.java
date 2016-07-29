@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
-                ToastUtils.showShort("home");
+
                 fragmentClass = LatestStoryFragment.class;
                 break;
             case R.id.nav_theme_post:
