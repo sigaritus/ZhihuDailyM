@@ -23,20 +23,17 @@
             android:icon="@drawable/ic_offline"
             android:title="@string/nav_offline" />
 
+        <item
+            android:id="@+id/nav_change_theme"
+            android:icon="@drawable/ic_themes"
+            android:title="@string/change_theme" />
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about"
+            android:title="@string/about" />
+
     </group>
 
-    <item android:title="@string/other">
-        <menu>
-            <item android:id="@+id/nav_change_theme"
-                android:icon="@drawable/ic_themes"
-                android:title="@string/change_theme" />
-
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/ic_about"
-                android:title="@string/about" />
-
-        </menu>
-    </item>
 
 </menu>

@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 import com.sigaritus.swu.zhihudailym.R;
 import com.sigaritus.swu.zhihudailym.fragment.HotStoryFragment;
 import com.sigaritus.swu.zhihudailym.fragment.LatestStoryFragment;
+import com.sigaritus.swu.zhihudailym.fragment.ThemeFragment;
 import com.sigaritus.swu.zhihudailym.util.ToastUtils;
 
 import butterknife.Bind;
@@ -85,8 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = LatestStoryFragment.class;
                 break;
             case R.id.nav_theme_post:
-
-                specialToolbarBehaviour = true;
+                fragmentClass = ThemeFragment.class;
                 break;
             case R.id.nav_hot_post:
                 fragmentClass = HotStoryFragment.class;

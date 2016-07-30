@@ -4,6 +4,7 @@ import com.sigaritus.swu.zhihudailym.bean.ZhihuDetailStory;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuHotResult;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuHotStory;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuLatestResult;
+import com.sigaritus.swu.zhihudailym.bean.ZhihuThemes;
 
 import java.util.List;
 
@@ -46,4 +47,6 @@ public interface ZhihuApi {
     @GET("news/{id}")
     Observable<ZhihuDetailStory> getDetailStory(@Path("id") String id);
 
+    @GET("themes")
+    Observable<ZhihuThemes> getThemes();
 }
