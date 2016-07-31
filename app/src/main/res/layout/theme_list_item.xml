@@ -15,8 +15,6 @@
             android:id="@+id/theme_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CardView"
-
             android:layout_gravity="center_horizontal"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/colorPrimaryText" />

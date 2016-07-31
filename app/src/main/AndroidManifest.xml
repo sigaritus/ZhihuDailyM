@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.StoryDetailActicity"></activity>
+        <activity android:name=".activity.StoryDetailActicity" />
+        <activity android:name=".activity.ThemeDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.sigaritus.swu.zhihudailym.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sigaritus.swu.zhihudailym.R;
+import com.sigaritus.swu.zhihudailym.activity.ThemeDetailActivity;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuThemes;
+import com.sigaritus.swu.zhihudailym.fragment.adapter.BaseRecyclerAdapter;
 import com.sigaritus.swu.zhihudailym.fragment.adapter.ThemeListAdapter;
 import com.sigaritus.swu.zhihudailym.network.Network;
 import com.sigaritus.swu.zhihudailym.util.ToastUtils;
@@ -26,9 +29,11 @@ public class ThemeFragment extends BaseFragment {
 
     @Bind(R.id.themes_list)
     RecyclerView themesList;
+
     public ThemeFragment() {
         // Required empty public constructor
     }
+
     Observer<ZhihuThemes> observer = new Observer<ZhihuThemes>() {
         @Override
         public void onCompleted() {
@@ -44,7 +49,15 @@ public class ThemeFragment extends BaseFragment {
         public void onNext(ZhihuThemes zhihuThemes) {
             ThemeListAdapter adapter = new ThemeListAdapter();
             adapter.setZhihuThemeList(zhihuThemes.zhihuThemesList);
-            themesList.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+            adapter.setOnRecyclerViewListener(new BaseRecyclerAdapter.OnRecyclerItemClickListener() {
+                @Override
+                public void onClick(View v, String data) {
+                    Intent intent = new Intent(getContext(), ThemeDetailActivity.class);
+                    intent.putExtra("id", data);
+                    startActivity(intent);
+                }
+            });
+            themesList.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
             themesList.setAdapter(adapter);
 
         }
@@ -68,7 +81,7 @@ public class ThemeFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_theme, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         unSubscribe();
         subscription = Network.getZhihuApi().getThemes()
                 .subscribeOn(Schedulers.io())
@@ -89,7 +102,6 @@ public class ThemeFragment extends BaseFragment {
         super.onDetach();
 
     }
-
 
 
 }

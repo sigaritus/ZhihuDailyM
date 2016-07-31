@@ -25,6 +25,7 @@ import com.sigaritus.swu.zhihudailym.bean.ZhihuTopStory;
 import com.sigaritus.swu.zhihudailym.fragment.adapter.BaseRecyclerAdapter;
 import com.sigaritus.swu.zhihudailym.fragment.adapter.LatestStoryListAdapter;
 import com.sigaritus.swu.zhihudailym.network.Network;
+import com.sigaritus.swu.zhihudailym.util.ToastUtils;
 
 import java.util.List;
 
@@ -72,7 +73,9 @@ public class LatestStoryFragment extends BaseFragment implements BaseSliderView.
                     .image(story.getImage())
                     .setScaleType(BaseSliderView.ScaleType.CenterCrop)
                     .setOnSliderClickListener(LatestStoryFragment.this);
-
+            textSliderView.bundle(new Bundle());
+            textSliderView.getBundle()
+                    .putString("id",story.getId()+"");
             storySlider.addSlider(textSliderView);
         }
 
@@ -125,7 +128,12 @@ public class LatestStoryFragment extends BaseFragment implements BaseSliderView.
 
         return view;
     }
-
+    @Override
+    public void onStop() {
+        // To prevent a memory leak on rotation, make sure to call stopAutoCycle() on the slider before activity or fragment is destroyed
+        storySlider.stopAutoCycle();
+        super.onStop();
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -157,6 +165,9 @@ public class LatestStoryFragment extends BaseFragment implements BaseSliderView.
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
+        Intent intent = new Intent(getContext(),StoryDetailActicity.class);
+        intent.putExtra("id",slider.getBundle().getString("id"));
+        startActivity(intent);
 
     }
 }

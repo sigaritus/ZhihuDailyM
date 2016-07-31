@@ -1,9 +1,11 @@
 package com.sigaritus.swu.zhihudailym.network.api;
 
+import com.sigaritus.swu.zhihudailym.bean.ThemeDetailResult;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuDetailStory;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuHotResult;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuHotStory;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuLatestResult;
+import com.sigaritus.swu.zhihudailym.bean.ZhihuStory;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuThemes;
 
 import java.util.List;
@@ -49,4 +51,7 @@ public interface ZhihuApi {
 
     @GET("themes")
     Observable<ZhihuThemes> getThemes();
+
+    @GET("theme/{id}")
+    Observable<ThemeDetailResult> getThemeDetail(@Path("id") String id);
 }

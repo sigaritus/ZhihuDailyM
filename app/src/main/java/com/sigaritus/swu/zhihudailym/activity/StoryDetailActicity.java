@@ -19,7 +19,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class StoryDetailActicity extends AppCompatActivity {
+public class StoryDetailActicity extends BaseActivity {
 
 
     @Bind(R.id.story_webView)
@@ -28,7 +28,7 @@ public class StoryDetailActicity extends AppCompatActivity {
     FloatingActionButton fab;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    Subscription subscription;
+
 
     String css = "<link rel=\"stylesheet\" href=\"zhihu_master.css\" type=\"text/css\">";
 

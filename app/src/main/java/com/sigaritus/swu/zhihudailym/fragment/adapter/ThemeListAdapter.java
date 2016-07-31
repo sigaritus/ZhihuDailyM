@@ -41,7 +41,8 @@ public class ThemeListAdapter extends BaseRecyclerAdapter {
         theme.themeDescription.setText(item.getDescription());
         theme.themeTitle.setText(item.getName());
         Glide.with(holder.itemView.getContext()).load(item.getThumbnail()).into(theme.themeThumb);
-
+        theme.itemView.setOnClickListener(this);
+        theme.itemView.setTag(item.getId());
     }
 
     @Override

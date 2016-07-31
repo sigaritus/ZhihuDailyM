@@ -17,10 +17,15 @@ import java.util.List;
  */
 public class LatestStoryListAdapter extends BaseRecyclerAdapter {
     private List<ZhihuStory> laststStory;
+    private String backgroundUrl;
 
     public void setLaststStory(List<ZhihuStory> laststStory) {
         this.laststStory = laststStory;
         notifyDataSetChanged();
+    }
+
+    public void setBackgroundUrl(String backgroundUrl) {
+        this.backgroundUrl = backgroundUrl;
     }
 
     @Override
@@ -33,7 +38,14 @@ public class LatestStoryListAdapter extends BaseRecyclerAdapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ZhihuStory item = laststStory.get(position);
         Story viewHolder = (Story) holder;
-        Glide.with(holder.itemView.getContext()).load(item.getImages()[0]).into(viewHolder.StoryThumbnail);
+        if (item.getImages()!=null){
+            Glide.with(holder.itemView.getContext()).load(item.getImages()[0]).into(viewHolder.StoryThumbnail);
+        }else {
+            Glide.with(holder.itemView.getContext())
+                    .load(backgroundUrl)
+                    .into(viewHolder.StoryThumbnail);
+        }
+
         viewHolder.StoryTitle.setText(item.getTitle());
         viewHolder.itemView.setTag(item.getId());
         viewHolder.itemView.setOnClickListener(this);
