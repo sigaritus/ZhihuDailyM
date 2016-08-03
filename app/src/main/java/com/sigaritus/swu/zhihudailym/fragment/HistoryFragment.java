@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
+import com.joanzapata.iconify.widget.IconTextView;
 import com.sigaritus.swu.zhihudailym.R;
 import com.sigaritus.swu.zhihudailym.activity.StoryDetailActicity;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuHistoryStoryResult;
@@ -44,7 +45,9 @@ public class HistoryFragment extends BaseFragment {
     @Bind(R.id.history_time_header)
     RecyclerViewHeader historyHeader;
     @Bind(R.id.history_time)
-    TextView historyTime;
+    IconTextView historyTime;
+
+
     LatestStoryListAdapter adapter = new LatestStoryListAdapter();
     SublimePickerFragment.Callback mFragmentCallback = new SublimePickerFragment.Callback() {
         @Override
@@ -56,7 +59,7 @@ public class HistoryFragment extends BaseFragment {
         public void onDateTimeRecurrenceSet(SelectedDate selectedDate, int hourOfDay,
                                             int minute, SublimeRecurrencePicker.RecurrenceOption recurrenceOption, String recurrenceRule) {
 
-            historyTime.setText(DateUtils.getDayAsString(selectedDate.getEndDate(),false));
+            historyTime.setText("{fa-calendar-check-o}  "+DateUtils.getDayAsString(selectedDate.getEndDate(),false));
             onLoadData(DateUtils.getDayAsReadableInt(selectedDate.getEndDate())+"");
         }
     };
@@ -118,7 +121,7 @@ public class HistoryFragment extends BaseFragment {
 
     private void initViews() {
         int historyDate = DateUtils.getDayAsReadableInt((new DateUtils.DefaultCalendarThreadLocal()).get())-1;
-        historyTime.setText(DateUtils.getDayAsString(new DateUtils.DefaultCalendarThreadLocal().get(),true));
+        historyTime.setText("{fa-calendar-check-o}  "+DateUtils.getDayAsString(new DateUtils.DefaultCalendarThreadLocal().get(),true));
         historyStory.setAdapter(adapter);
         adapter.setOnRecyclerViewListener(new BaseRecyclerAdapter.OnRecyclerItemClickListener() {
             @Override

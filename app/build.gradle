@@ -44,4 +44,8 @@ dependencies {
     compile 'com.daimajia.slider:library:1.1.5@aar'
     compile 'com.bartoszlipinski:recyclerviewheader2:2.0.0'
     compile 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.1'
+    compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
+
+
+
 }
