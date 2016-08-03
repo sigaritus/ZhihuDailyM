@@ -93,9 +93,7 @@ public class HotStoryFragment extends BaseFragment {
         adapter.setOnRecyclerViewListener(new BaseRecyclerAdapter.OnRecyclerItemClickListener() {
             @Override
             public void onClick(View v, String data) {
-                Intent intent = new Intent(getContext(), StoryDetailActicity.class);
-                intent.putExtra("id",data);
-                startActivity(intent);
+                getDetail(data);
             }
         });
 

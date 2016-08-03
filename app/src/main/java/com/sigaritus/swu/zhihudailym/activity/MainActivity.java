@@ -17,10 +17,12 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.sigaritus.swu.zhihudailym.R;
+import com.sigaritus.swu.zhihudailym.fragment.HistoryFragment;
 import com.sigaritus.swu.zhihudailym.fragment.HotStoryFragment;
 import com.sigaritus.swu.zhihudailym.fragment.LatestStoryFragment;
 import com.sigaritus.swu.zhihudailym.fragment.ThemeFragment;
 import com.sigaritus.swu.zhihudailym.util.ToastUtils;
+import com.sigaritus.swu.zhihudailym.view.SublimePickerFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = HotStoryFragment.class;
                 break;
             case R.id.nav_history:
-
+                fragmentClass = HistoryFragment.class;
                 break;
             case R.id.nav_offline:
 
