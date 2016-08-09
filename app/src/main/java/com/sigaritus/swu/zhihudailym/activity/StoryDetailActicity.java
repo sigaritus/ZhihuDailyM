@@ -1,9 +1,10 @@
 package com.sigaritus.swu.zhihudailym.activity;
 
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -14,8 +15,8 @@ import com.sigaritus.swu.zhihudailym.network.Network;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.github.yavski.fabspeeddial.FabSpeedDial;
 import rx.Observer;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -24,8 +25,8 @@ public class StoryDetailActicity extends BaseActivity {
 
     @Bind(R.id.story_webView)
     WebView story_webView;
-    @Bind(R.id.fab)
-    FloatingActionButton fab;
+    @Bind(R.id.story_fab)
+    FabSpeedDial fab;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
@@ -89,5 +90,26 @@ public class StoryDetailActicity extends BaseActivity {
 
 
         story_webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_story_detail, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.story_like) {
+
+            return true;
+        }else if (id == R.id.story_share){
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

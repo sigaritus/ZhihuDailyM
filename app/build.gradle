@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 23
     buildToolsVersion "24"
@@ -17,14 +17,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    greendao {
+        //数据库版本
+        schemaVersion 1
+        daoPackage 'com.sigaritus.swu.zhihudailym.greendao.gen'
+        targetGenDir 'src/main/java'
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-
-
-
 
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
@@ -46,6 +49,7 @@ dependencies {
     compile 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.1'
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
 
-
-
+    compile 'org.greenrobot:greendao:3.0.1'
+    compile'org.greenrobot:greendao-generator:3.0.0'
+    compile 'io.github.yavski:fab-speed-dial:1.0.4'
 }

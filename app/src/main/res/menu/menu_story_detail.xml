@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/story_like"
+        android:icon="@drawable/ic_grade_black_36dp"
+        android:title="@string/latest_post"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/story_share"
+        android:icon="@drawable/ic_share_black_36dp"
+        android:title="@string/theme_post"
+        app:showAsAction="ifRoom"/>
+</menu>

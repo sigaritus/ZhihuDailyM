@@ -1,12 +1,19 @@
 package com.sigaritus.swu.zhihudailym.bean;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+
 /**
  * Created by Administrator on 2016/7/18.
  */
+
 public class ZhihuStory {
+
+    private int id;
+
     private String title;
     private String[] images;
-    private int id;
+
 
     public String getTitle() {
         return title;

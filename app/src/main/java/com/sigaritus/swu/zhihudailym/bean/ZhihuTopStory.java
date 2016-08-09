@@ -1,13 +1,29 @@
 package com.sigaritus.swu.zhihudailym.bean;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
+
 /**
  * Created by Administrator on 2016/7/18.
  */
+@Entity( nameInDb = "ZHIHU_STORY")
 public class ZhihuTopStory {
+
+    @Id
+    private int id;
     private String title;
     private String image;
-    private int id;
+    @Generated(hash = 1923475537)
+    public ZhihuTopStory(int id, String title, String image) {
+        this.id = id;
+        this.title = title;
+        this.image = image;
+    }
 
+    @Generated(hash = 1819061576)
+    public ZhihuTopStory() {
+    }
     public String getTitle() {
         return title;
     }

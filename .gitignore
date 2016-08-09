@@ -6,3 +6,7 @@
 .DS_Store
 /build
 /captures
+libs/
+src/main/java/com/sigaritus/swu/zhihudailym/greendao/
+src/main/java/com/sigaritus/swu/zhihudailym/model/
+src/main/java/com/sigaritus/swu/zhihudailym/presenter/
