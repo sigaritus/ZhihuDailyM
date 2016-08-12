@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
 import com.sigaritus.swu.zhihudailym.R;
 import com.sigaritus.swu.zhihudailym.activity.StoryDetailActicity;
+import com.sigaritus.swu.zhihudailym.bean.ZhihuDetailStory;
 
 import rx.Subscription;
 
@@ -34,6 +36,13 @@ public abstract class BaseFragment extends Fragment {
     protected void getDetail(String data){
         Intent intent = new Intent(getContext(), StoryDetailActicity.class);
         intent.putExtra("id",data);
+        startActivity(intent);
+    }
+
+    protected void getOfflineDetail(ZhihuDetailStory story){
+        Intent intent = new Intent(getContext(), StoryDetailActicity.class);
+        Gson gson = new Gson();
+        intent.putExtra("detailStory",gson.toJson(story));
         startActivity(intent);
     }
 }

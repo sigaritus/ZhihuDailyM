@@ -20,6 +20,7 @@ import com.sigaritus.swu.zhihudailym.R;
 import com.sigaritus.swu.zhihudailym.fragment.HistoryFragment;
 import com.sigaritus.swu.zhihudailym.fragment.HotStoryFragment;
 import com.sigaritus.swu.zhihudailym.fragment.LatestStoryFragment;
+import com.sigaritus.swu.zhihudailym.fragment.LikedFragment;
 import com.sigaritus.swu.zhihudailym.fragment.ThemeFragment;
 import com.sigaritus.swu.zhihudailym.util.ToastUtils;
 import com.sigaritus.swu.zhihudailym.view.SublimePickerFragment;
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = HistoryFragment.class;
                 break;
             case R.id.nav_offline:
-
+                fragmentClass = LikedFragment.class;
                 break;
 
             case R.id.nav_change_theme:

@@ -8,12 +8,15 @@ import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import com.google.gson.Gson;
 import com.sigaritus.swu.zhihudailym.R;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuDetailStory;
 import com.sigaritus.swu.zhihudailym.db.DBManager;
 import com.sigaritus.swu.zhihudailym.network.Network;
 import com.sigaritus.swu.zhihudailym.util.ToastUtils;
 
+
+import java.lang.reflect.Type;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,7 +30,6 @@ import rx.schedulers.Schedulers;
 
 public class StoryDetailActicity extends BaseActivity {
 
-
     @Bind(R.id.story_webView)
     WebView story_webView;
     @Bind(R.id.story_fab)
@@ -36,7 +38,7 @@ public class StoryDetailActicity extends BaseActivity {
     Toolbar toolbar;
 
     ZhihuDetailStory saveTemp;
-
+    ZhihuDetailStory storyTemp;
     String css = "<link rel=\"stylesheet\" href=\"zhihu_master.css\" type=\"text/css\">";
 
     Observer<ZhihuDetailStory> observer = new Observer<ZhihuDetailStory>() {
@@ -53,18 +55,7 @@ public class StoryDetailActicity extends BaseActivity {
         @Override
         public void onNext(ZhihuDetailStory zhihuDetailStory) {
             saveTemp = zhihuDetailStory;
-            toolbar.setTitle(zhihuDetailStory.getTitle());
-            String content = zhihuDetailStory.getBody().replace("<div class=\"img-place-holder\">", "");
-            String html = "<!DOCTYPE html>\n"
-                    + "<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">\n"
-                    + "<head>\n"
-                    + "\t<meta charset=\"utf-8\" />"
-                    + css
-                    + "\n</head>\n"
-                    + content
-                    + "</body></html>";
-
-            story_webView.loadDataWithBaseURL("file:///android_asset/",html,"text/html","utf-8",null);
+            renderPage(zhihuDetailStory);
         }
     };
 
@@ -74,11 +65,18 @@ public class StoryDetailActicity extends BaseActivity {
         setContentView(R.layout.activity_stroy_detail);
         ButterKnife.bind(this);
         initViews();
-        subscription = Network.getZhihuApi()
-                .getDetailStory(getIntent().getStringExtra("id"))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+
+        if (getIntent().getAction().equals("id")) {
+            subscription = Network.getZhihuApi()
+                    .getDetailStory(getIntent().getStringExtra("id"))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
+        } else if (getIntent().getAction().equals("detailStory")) {
+            Gson gson = new Gson();
+            storyTemp = gson.fromJson(getIntent().getStringExtra("detailStory"), ZhihuDetailStory.class);
+            renderPage(storyTemp);
+        }
     }
 
     private void initViews() {
@@ -103,13 +101,13 @@ public class StoryDetailActicity extends BaseActivity {
 
                 if (id == R.id.story_like) {
 
-                    if (null!=saveTemp){
+                    if (null != saveTemp) {
                         saveStory(saveTemp);
                         ToastUtils.showShort("收藏成功");
                     }
 
                     return true;
-                }else if (id == R.id.story_share){
+                } else if (id == R.id.story_share) {
 
                     return true;
                 }
@@ -145,6 +143,22 @@ public class StoryDetailActicity extends BaseActivity {
                         ToastUtils.showLong("保存成功");
                     }
                 });
+
+    }
+
+    private void renderPage(ZhihuDetailStory zhihuDetailStory) {
+        toolbar.setTitle(zhihuDetailStory.getTitle());
+        String content = zhihuDetailStory.getBody().replace("<div class=\"img-place-holder\">", "");
+        String html = "<!DOCTYPE html>\n"
+                + "<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">\n"
+                + "<head>\n"
+                + "\t<meta charset=\"utf-8\" />"
+                + css
+                + "\n</head>\n"
+                + content
+                + "</body></html>";
+
+        story_webView.loadDataWithBaseURL("file:///android_asset/", html, "text/html", "utf-8", null);
 
     }
 

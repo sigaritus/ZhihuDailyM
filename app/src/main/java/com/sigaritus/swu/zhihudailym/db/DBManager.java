@@ -62,6 +62,7 @@ public class DBManager {
         DaoSession daoSession = daoMaster.newSession();
         ZhihuDetailStoryDao zhihuDetailStoryDao = daoSession.getZhihuDetailStoryDao();
         QueryBuilder<ZhihuDetailStory> qb=zhihuDetailStoryDao.queryBuilder();
+
         List<ZhihuDetailStory> list = qb.list();
         return list;
     }
