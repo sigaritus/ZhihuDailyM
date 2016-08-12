@@ -10,13 +10,18 @@ import android.webkit.WebView;
 
 import com.sigaritus.swu.zhihudailym.R;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuDetailStory;
+import com.sigaritus.swu.zhihudailym.db.DBManager;
 import com.sigaritus.swu.zhihudailym.network.Network;
+import com.sigaritus.swu.zhihudailym.util.ToastUtils;
 
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.yavski.fabspeeddial.FabSpeedDial;
+import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
+import rx.Observable;
 import rx.Observer;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -30,6 +35,7 @@ public class StoryDetailActicity extends BaseActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
+    ZhihuDetailStory saveTemp;
 
     String css = "<link rel=\"stylesheet\" href=\"zhihu_master.css\" type=\"text/css\">";
 
@@ -46,7 +52,7 @@ public class StoryDetailActicity extends BaseActivity {
 
         @Override
         public void onNext(ZhihuDetailStory zhihuDetailStory) {
-
+            saveTemp = zhihuDetailStory;
             toolbar.setTitle(zhihuDetailStory.getTitle());
             String content = zhihuDetailStory.getBody().replace("<div class=\"img-place-holder\">", "");
             String html = "<!DOCTYPE html>\n"
@@ -88,28 +94,59 @@ public class StoryDetailActicity extends BaseActivity {
         //开启application Cache功能
         story_webView.getSettings().setAppCacheEnabled(false);
 
-
         story_webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+
+        fab.setMenuListener(new SimpleMenuListenerAdapter() {
+            @Override
+            public boolean onMenuItemSelected(MenuItem menuItem) {
+                int id = menuItem.getItemId();
+
+                if (id == R.id.story_like) {
+
+                    if (null!=saveTemp){
+                        saveStory(saveTemp);
+                        ToastUtils.showShort("收藏成功");
+                    }
+
+                    return true;
+                }else if (id == R.id.story_share){
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_story_detail, menu);
-        return true;
+    private void saveStory(final ZhihuDetailStory saveTemp) {
+
+        Observable.create(new Observable.OnSubscribe<ZhihuDetailStory>() {
+            @Override
+            public void call(Subscriber<? super ZhihuDetailStory> subscriber) {
+                DBManager.getNewInstance(StoryDetailActicity.this).insertStory(saveTemp);
+                subscriber.onCompleted();
+            }
+        }).subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ZhihuDetailStory>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ToastUtils.showLong(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(ZhihuDetailStory zhihuDetailStory) {
+                        ToastUtils.showLong("保存成功");
+                    }
+                });
+
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        if (id == R.id.story_like) {
-
-            return true;
-        }else if (id == R.id.story_share){
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
