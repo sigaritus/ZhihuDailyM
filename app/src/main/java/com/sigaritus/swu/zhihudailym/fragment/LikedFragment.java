@@ -30,7 +30,7 @@ public class LikedFragment extends BaseFragment {
 
     @Bind(R.id.liked_story_list)
     RecyclerView likedStoryList;
-    LikedStoryListAdapter adapter = new LikedStoryListAdapter();
+    LikedStoryListAdapter adapter ;
     public LikedFragment() {
         // Required empty public constructor
     }
@@ -47,6 +47,9 @@ public class LikedFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_liked, container, false);
+
+        adapter = new LikedStoryListAdapter(getContext());
+
         ButterKnife.bind(this, view);
 
         likedStoryList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -79,14 +82,14 @@ public class LikedFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onNext(List<ZhihuDetailStory> zhihuDetailStories) {
+                    public void onNext(final List<ZhihuDetailStory> zhihuDetailStories) {
                         adapter.setmStoryList(zhihuDetailStories);
-//                        adapter.setOnRecyclerViewListener(new BaseRecyclerAdapter.OnRecyclerItemClickListener() {
-//                            @Override
-//                            public void onClick(View v, String data) {
-//                                getOfflineDetail(data);
-//                            }
-//                        });
+                        adapter.setOnRecyclerViewListener(new BaseRecyclerAdapter.OnRecyclerItemClickListener() {
+                            @Override
+                            public void onClick(View v, String data) {
+                                getOfflineDetail(zhihuDetailStories.get((Integer) v.getTag()));
+                            }
+                        });
                     }
                 });
 

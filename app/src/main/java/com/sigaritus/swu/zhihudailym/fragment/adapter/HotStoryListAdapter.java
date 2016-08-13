@@ -36,8 +36,8 @@ public class HotStoryListAdapter extends BaseRecyclerAdapter{
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Story viewHolder = (Story) holder;
         ZhihuHotStory item = hotStories.get(position);
-        Glide.with(holder.itemView.getContext()).load(item.getThumbnail()).into(viewHolder.StoryThumbnail);
-        viewHolder.StoryTitle.setText(item.getTitle());
+        Glide.with(holder.itemView.getContext()).load(item.getThumbnail()).into(viewHolder.storyThumbnail);
+        viewHolder.storyTitle.setText(item.getTitle());
         viewHolder.itemView.setTag(item.getNews_id());
         viewHolder.itemView.setOnClickListener(this);
     }

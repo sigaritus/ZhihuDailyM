@@ -1,5 +1,6 @@
 package com.sigaritus.swu.zhihudailym.activity;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -65,17 +66,19 @@ public class StoryDetailActicity extends BaseActivity {
         setContentView(R.layout.activity_stroy_detail);
         ButterKnife.bind(this);
         initViews();
-
-        if (getIntent().getAction().equals("id")) {
-            subscription = Network.getZhihuApi()
-                    .getDetailStory(getIntent().getStringExtra("id"))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(observer);
-        } else if (getIntent().getAction().equals("detailStory")) {
-            Gson gson = new Gson();
-            storyTemp = gson.fromJson(getIntent().getStringExtra("detailStory"), ZhihuDetailStory.class);
-            renderPage(storyTemp);
+        Intent intent = getIntent();
+        if (intent!=null) {
+            if (null!=intent.getStringExtra("id")) {
+                subscription = Network.getZhihuApi()
+                        .getDetailStory(intent.getStringExtra("id"))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(observer);
+            } else if (null!=intent.getStringExtra("detailStory")) {
+                Gson gson = new Gson();
+                storyTemp = gson.fromJson(intent.getStringExtra("detailStory"), ZhihuDetailStory.class);
+                renderPage(storyTemp);
+            }
         }
     }
 

@@ -39,14 +39,14 @@ public class LatestStoryListAdapter extends BaseRecyclerAdapter {
         ZhihuStory item = laststStory.get(position);
         Story viewHolder = (Story) holder;
         if (item.getImages()!=null){
-            Glide.with(holder.itemView.getContext()).load(item.getImages()[0]).into(viewHolder.StoryThumbnail);
+            Glide.with(holder.itemView.getContext()).load(item.getImages()[0]).into(viewHolder.storyThumbnail);
         }else {
             Glide.with(holder.itemView.getContext())
                     .load(backgroundUrl)
-                    .into(viewHolder.StoryThumbnail);
+                    .into(viewHolder.storyThumbnail);
         }
 
-        viewHolder.StoryTitle.setText(item.getTitle());
+        viewHolder.storyTitle.setText(item.getTitle());
         viewHolder.itemView.setTag(item.getId());
         viewHolder.itemView.setOnClickListener(this);
     }

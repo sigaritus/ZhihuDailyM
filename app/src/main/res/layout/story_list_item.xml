@@ -4,16 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/hot_list_width"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
+    android:layout_margin="2dp"
     app:cardCornerRadius="5dp"
     app:cardUseCompatPadding="true"
     app:cardPreventCornerOverlap="true"
     >
+    <ImageView
+        android:layout_margin="3dp"
+        android:id="@+id/ic_expand"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_expand_more_black_36dp"
+        android:layout_gravity="right"
+        android:visibility="gone"
+        />
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         >
+
         <ImageView
             android:layout_width="110dp"
             android:layout_height="110dp"

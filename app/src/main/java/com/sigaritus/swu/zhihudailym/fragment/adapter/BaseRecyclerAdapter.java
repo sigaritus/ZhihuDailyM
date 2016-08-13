@@ -19,7 +19,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter implement
     private OnRecyclerItemClickListener OnRecyclerViewListener;
     public interface OnRecyclerItemClickListener{
         void onClick(View v,String data);
-//        void onClick(View v,String data,int position);
+//
     }
 
 
@@ -37,10 +37,11 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter implement
 
     class Story extends RecyclerView.ViewHolder {
         @Bind(R.id.story_thumbnail)
-        ImageView StoryThumbnail;
+        ImageView storyThumbnail;
         @Bind(R.id.story_title)
-        TextView StoryTitle;
-
+        TextView storyTitle;
+        @Bind(R.id.ic_expand)
+        ImageView icExpand;
         public Story(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

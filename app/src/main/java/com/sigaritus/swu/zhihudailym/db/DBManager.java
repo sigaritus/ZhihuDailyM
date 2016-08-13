@@ -67,4 +67,10 @@ public class DBManager {
         return list;
     }
 
+    public void deleteZhihuDetailStory(ZhihuDetailStory story) {
+        DaoMaster daoMaster = ZhihuDailyMApp.getDaoMaster(mContext,READABLE_DATABASE);
+        DaoSession daoSession = daoMaster.newSession();
+        daoSession.delete(story);
+    }
+
 }
