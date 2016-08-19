@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.sigaritus.swu.zhihudailym.R;
+import com.sigaritus.swu.zhihudailym.fragment.AboutFragment;
 import com.sigaritus.swu.zhihudailym.fragment.HistoryFragment;
 import com.sigaritus.swu.zhihudailym.fragment.HotStoryFragment;
 import com.sigaritus.swu.zhihudailym.fragment.LatestStoryFragment;
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     private void selectDrawerItem(MenuItem menuItem) {
         boolean specialToolbarBehaviour = false;
 
-        Class fragmentClass = HotStoryFragment.class;
+        Class fragmentClass = null;
 
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
@@ -101,11 +102,11 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = LikedFragment.class;
                 break;
 
-            case R.id.nav_change_theme:
-
-                break;
+//            case R.id.nav_change_theme:
+//
+//                break;
             case R.id.nav_about:
-
+                fragmentClass = AboutFragment.class;
                 break;
             default:
                 fragmentClass = HotStoryFragment.class;

@@ -23,6 +23,8 @@ import com.sigaritus.swu.zhihudailym.fragment.adapter.BaseRecyclerAdapter;
 import com.sigaritus.swu.zhihudailym.fragment.adapter.HotStoryListAdapter;
 import com.sigaritus.swu.zhihudailym.network.Network;
 import com.sigaritus.swu.zhihudailym.util.ToastUtils;
+import com.sigaritus.swu.zhihudailym.view.phoenix.PullToRefreshView;
+
 
 import java.util.List;
 
@@ -37,8 +39,8 @@ import rx.schedulers.Schedulers;
 
 public class HotStoryFragment extends BaseFragment {
 
-    @Bind(R.id.refresh_layout)
-    SwipeRefreshLayout refreshLayout;
+    @Bind(R.id.pull_to_refresh)
+    PullToRefreshView pullToRefreshView;
     @Bind(R.id.hot_story_list)
     RecyclerView hotStoryList;
 
@@ -54,14 +56,14 @@ public class HotStoryFragment extends BaseFragment {
 
         @Override
         public void onError(Throwable e) {
-            refreshLayout.setRefreshing(false);
+            pullToRefreshView.setRefreshing(false);
             ToastUtils.showShort("error happened :( "+e.getStackTrace()+e.getMessage());
 
         }
 
         @Override
         public void onNext(ZhihuHotResult zhihuHotStories) {
-            refreshLayout.setRefreshing(false);
+            pullToRefreshView.setRefreshing(false);
             adapter.setHotStories(zhihuHotStories.recent);
         }
     };
@@ -99,11 +101,16 @@ public class HotStoryFragment extends BaseFragment {
 
         onLoad();
 
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        pullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                onLoad();
-                refreshLayout.setRefreshing(false);
+                pullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        onLoad();
+                        pullToRefreshView.setRefreshing(false);
+                    }
+                }, REFRESH_DELAY);
             }
         });
 
@@ -111,7 +118,7 @@ public class HotStoryFragment extends BaseFragment {
     }
 
     private void onLoad(){
-        refreshLayout.setRefreshing(true);
+        pullToRefreshView.setRefreshing(true);
         unSubscribe();
         subscription = Network.getZhihuApi()
                 .getHotStory()

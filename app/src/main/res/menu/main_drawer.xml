@@ -23,10 +23,10 @@
             android:icon="@drawable/ic_offline"
             android:title="@string/nav_offline" />
 
-        <item
-            android:id="@+id/nav_change_theme"
-            android:icon="@drawable/ic_themes"
-            android:title="@string/change_theme" />
+        <!--<item-->
+            <!--android:id="@+id/nav_change_theme"-->
+            <!--android:icon="@drawable/ic_themes"-->
+            <!--android:title="@string/change_theme" />-->
 
         <item
             android:id="@+id/nav_about"

@@ -10,5 +10,9 @@
     <attr name="textColorWhiteCustomized" format="color" />
     <attr name="navigationBarColorCustomized" format="color" />
 
-
+    <declare-styleable name="RefreshView">
+        <attr name="type" format="enum">
+            <enum name="sun" value="0" />
+        </attr>
+    </declare-styleable>
 </resources>

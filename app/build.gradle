@@ -3,7 +3,6 @@ apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 23
     buildToolsVersion "24"
-
     defaultConfig {
         applicationId "com.sigaritus.swu.zhihudailym"
         minSdkVersion 19
@@ -11,46 +10,90 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    buildTypes {
+    lintOptions {
+        abortOnError false
+    }
+    signingConfigs {
+        debug {
+            // No debug config
+        }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            keyAlias 'fir-release'
+            keyPassword 'cymyd663'
+            storeFile file('android.keystore')
+            storePassword 'cymyd663'
         }
     }
-    greendao {
-        //数据库版本
-        schemaVersion 1
-        daoPackage 'com.sigaritus.swu.zhihudailym.greendao.gen'
-        targetGenDir 'src/main/java'
+
+    buildTypes {
+        release {
+            applicationIdSuffix ".release"
+            minifyEnabled false
+
+            signingConfig signingConfigs.release
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+        }
     }
-}
+    // 这里是为了不同过的版本设置一些特殊的参数，并不直接和 buildType 关联。
+//例如：使用 buildType 中的 dev 版本，也可以使用 flavors_release 里面设置的自定义参数。这需要自己按照需求制定。
+    productFlavors {
 
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
+//自定义名字不过不能和上面buildType中相同，不然Gradle编译会不通过。在这里使用了『flavors_』前缀以便区分。
+        flavors_release {
 
+            // manifestPlaceholders中写到的『str』，『package_name』不支持用大写，否则Gradle编译会不通过。
+            // 这里所设置的变量可以直接使用在『AndroidManifest.xml』中，使用方式为：${package_name}
+            // android:label="${package_name}"
+            manifestPlaceholders = [str: "releaseStr", package_name: "com.sigaritus.swu.zhihudailym.release"]
 
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
-    compile 'com.android.support:cardview-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
-    compile 'io.reactivex:rxjava:1.1.0'
-    compile 'io.reactivex:rxandroid:1.1.0'
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'com.squareup.retrofit2:retrofit:2.0.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.squareup.picasso:picasso:2.3.2'
-    compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.daimajia.slider:library:1.1.5@aar'
-    compile 'com.bartoszlipinski:recyclerviewheader2:2.0.0'
-    compile 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.1'
-    compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
-    compile 'org.greenrobot:greendao:3.0.1'
-    compile 'org.greenrobot:greendao-generator:3.0.0'
-    compile 'io.github.yavski:fab-speed-dial:1.0.4'
-    compile "com.daimajia.swipelayout:library:1.2.0@aar"
+            // 这里的参数是为了在 java 代码中使用，具体的使用方式为：context.getResources().getString(R.string.strKey);
+            resValue("string", "strKey", "releaseStrValue")
+        }
+
+        flavors_dev {
+            manifestPlaceholders = [str: "devStr", package_name: "com.sigaritus.swu.zhihudailym.dev"]
+
+            resValue("string", "strKey", "devStrValue")
+        }
+        greendao {
+            //数据库版本
+            schemaVersion 1
+            daoPackage 'com.sigaritus.swu.zhihudailym.greendao.gen'
+            targetGenDir 'src/main/java'
+        }
+    }
+
+    dependencies {
+        compile fileTree(include: ['*.jar'], dir: 'libs')
+        testCompile 'junit:junit:4.12'
+        compile 'com.android.support:appcompat-v7:23.4.0'
+        compile 'com.android.support:recyclerview-v7:23.4.0'
+        compile 'com.android.support:cardview-v7:23.4.0'
+        compile 'com.android.support:design:23.4.0'
+        compile 'com.android.support:support-v4:23.4.0'
+        compile 'io.reactivex:rxjava:1.1.0'
+        compile 'io.reactivex:rxandroid:1.1.0'
+        compile 'com.squareup.okhttp3:okhttp:3.2.0'
+        compile 'com.squareup.retrofit2:retrofit:2.0.0'
+        compile 'com.squareup.retrofit2:converter-gson:2.0.0'
+        compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
+        compile 'com.jakewharton:butterknife:7.0.1'
+        compile 'com.github.bumptech.glide:glide:3.7.0'
+        compile 'com.squareup.picasso:picasso:2.3.2'
+        compile 'com.nineoldandroids:library:2.4.0'
+        compile 'com.daimajia.slider:library:1.1.5@aar'
+        compile 'com.bartoszlipinski:recyclerviewheader2:2.0.0'
+        compile 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.1'
+        compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
+        compile 'org.greenrobot:greendao:3.0.1'
+        compile 'org.greenrobot:greendao-generator:3.0.0'
+        compile 'io.github.yavski:fab-speed-dial:1.0.4'
+        compile 'com.daimajia.swipelayout:library:1.2.0@aar'
+        compile 'com.github.medyo:android-about-page:1.1.0'
+    }
 }

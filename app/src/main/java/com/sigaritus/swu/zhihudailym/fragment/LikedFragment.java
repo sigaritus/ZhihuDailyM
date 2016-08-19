@@ -7,6 +7,7 @@ import android.text.AndroidCharacter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.sigaritus.swu.zhihudailym.R;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuDetailStory;
@@ -30,6 +31,8 @@ public class LikedFragment extends BaseFragment {
 
     @Bind(R.id.liked_story_list)
     RecyclerView likedStoryList;
+    @Bind(R.id.null_view)
+    ImageView nullView;
     LikedStoryListAdapter adapter ;
     public LikedFragment() {
         // Required empty public constructor
@@ -83,13 +86,19 @@ public class LikedFragment extends BaseFragment {
 
                     @Override
                     public void onNext(final List<ZhihuDetailStory> zhihuDetailStories) {
-                        adapter.setmStoryList(zhihuDetailStories);
-                        adapter.setOnRecyclerViewListener(new BaseRecyclerAdapter.OnRecyclerItemClickListener() {
-                            @Override
-                            public void onClick(View v, String data) {
-                                getOfflineDetail(zhihuDetailStories.get((Integer) v.getTag()));
-                            }
-                        });
+                        if (zhihuDetailStories.size()==0){
+                            likedStoryList.setVisibility(View.GONE);
+                            nullView.setVisibility(View.VISIBLE);
+                        }else{
+                            adapter.setmStoryList(zhihuDetailStories);
+                            adapter.setOnRecyclerViewListener(new BaseRecyclerAdapter.OnRecyclerItemClickListener() {
+                                @Override
+                                public void onClick(View v, String data) {
+                                    getOfflineDetail(zhihuDetailStories.get((Integer) v.getTag()));
+                                }
+                            });
+                        }
+
                     }
                 });
 
