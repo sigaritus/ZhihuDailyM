@@ -1,11 +1,7 @@
 package com.sigaritus.swu.zhihudailym.fragment;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,27 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sigaritus.swu.zhihudailym.R;
-import com.sigaritus.swu.zhihudailym.activity.StoryDetailActicity;
-import com.sigaritus.swu.zhihudailym.bean.ZhihuDetailStory;
 import com.sigaritus.swu.zhihudailym.bean.ZhihuHotResult;
-import com.sigaritus.swu.zhihudailym.bean.ZhihuHotStory;
-import com.sigaritus.swu.zhihudailym.bean.ZhihuLatestResult;
-import com.sigaritus.swu.zhihudailym.bean.ZhihuTopStory;
 import com.sigaritus.swu.zhihudailym.fragment.adapter.BaseRecyclerAdapter;
 import com.sigaritus.swu.zhihudailym.fragment.adapter.HotStoryListAdapter;
 import com.sigaritus.swu.zhihudailym.network.Network;
 import com.sigaritus.swu.zhihudailym.util.ToastUtils;
-import com.sigaritus.swu.zhihudailym.view.phoenix.PullToRefreshView;
+import com.sigaritus.swu.zhihudailym.widget.phoenix.PullToRefreshView;
 
-
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 
@@ -110,7 +97,7 @@ public class HotStoryFragment extends BaseFragment {
                         onLoad();
                         pullToRefreshView.setRefreshing(false);
                     }
-                }, REFRESH_DELAY);
+                }, 200);
             }
         });
 

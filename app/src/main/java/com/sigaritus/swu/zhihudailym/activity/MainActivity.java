@@ -1,8 +1,6 @@
 package com.sigaritus.swu.zhihudailym.activity;
 
-import android.annotation.TargetApi;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,8 +21,6 @@ import com.sigaritus.swu.zhihudailym.fragment.HotStoryFragment;
 import com.sigaritus.swu.zhihudailym.fragment.LatestStoryFragment;
 import com.sigaritus.swu.zhihudailym.fragment.LikedFragment;
 import com.sigaritus.swu.zhihudailym.fragment.ThemeFragment;
-import com.sigaritus.swu.zhihudailym.util.ToastUtils;
-import com.sigaritus.swu.zhihudailym.view.SublimePickerFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -120,21 +116,21 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        setToolbarElevation(specialToolbarBehaviour);
+        // setToolbarElevation(specialToolbarBehaviour);
         menuItem.setChecked(true);
         setTitle(menuItem.getTitle());
         drawerLayout.closeDrawers();
     }
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void setToolbarElevation(boolean specialToolbarBehaviour) {
-        if (specialToolbarBehaviour) {
-            toolbar.setElevation(0.0f);
-            mainContainer.setElevation(getResources().getDimension(R.dimen.elevation_toolbar));
-        } else {
-            toolbar.setElevation(getResources().getDimension(R.dimen.elevation_toolbar));
-            mainContainer.setElevation(0.0f);
-        }
-    }
+//    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+//    private void setToolbarElevation(boolean specialToolbarBehaviour) {
+//        if (specialToolbarBehaviour) {
+//            toolbar.setElevation(0.0f);
+//            mainContainer.setElevation(getResources().getDimension(R.dimen.elevation_toolbar));
+//        } else {
+//            toolbar.setElevation(getResources().getDimension(R.dimen.elevation_toolbar));
+//            mainContainer.setElevation(0.0f);
+//        }
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

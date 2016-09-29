@@ -14,9 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal|top">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+
             <com.joanzapata.iconify.widget.IconTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -36,7 +34,7 @@
                 android:layout_marginTop="25dp"
                 android:id="@+id/date_instructions"
                 />
-        </RelativeLayout>
+
 
     </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
 </FrameLayout>

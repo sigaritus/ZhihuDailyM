@@ -22,7 +22,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.StoryDetailActicity" />
-        <activity android:name=".activity.ThemeDetailActivity"></activity>
+        <activity android:name=".activity.ThemeDetailActivity">
+        </activity>
+
     </application>
 
 </manifest>

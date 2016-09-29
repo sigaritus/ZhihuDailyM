@@ -10,3 +10,17 @@ libs/
 src/main/java/com/sigaritus/swu/zhihudailym/greendao/
 src/main/java/com/sigaritus/swu/zhihudailym/model/
 src/main/java/com/sigaritus/swu/zhihudailym/presenter/
+src/main/java/com/sigaritus/swu/zhihudailym/view/WBShareActivity.java
+src/main/java/com/sigaritus/swu/zhihudailym/view/WXEntryActivity.java
+src/main/res/anim/
+src/main/res/drawable/umeng_socialize_qq_off.png
+src/main/res/drawable/umeng_socialize_qq_on.png
+src/main/res/drawable/umeng_socialize_qzone_off.png
+src/main/res/drawable/umeng_socialize_qzone_on.png
+src/main/res/drawable/umeng_socialize_wechat.png
+src/main/res/drawable/umeng_socialize_wechat_gray.png
+src/main/res/drawable/umeng_socialize_wxcircle.png
+src/main/res/drawable/umeng_socialize_wxcircle_gray.png
+src/main/res/values/umeng_socialize_colors.xml
+src/main/res/values/umeng_socialize_strings.xml
+src/main/res/values/umeng_socialize_style.xml

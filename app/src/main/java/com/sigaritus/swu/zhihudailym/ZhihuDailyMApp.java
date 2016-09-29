@@ -7,6 +7,7 @@ import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.sigaritus.swu.zhihudailym.greendao.gen.DaoMaster;
 import com.sigaritus.swu.zhihudailym.greendao.gen.DaoSession;
+import com.umeng.socialize.PlatformConfig;
 
 /**
  * Created by Administrator on 2016/7/19.

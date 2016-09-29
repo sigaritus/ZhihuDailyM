@@ -7,3 +7,6 @@
 .DS_Store
 /captures
 .externalNativeBuild
+android.keystore
+app-flavors_release-release.apk
+proguard-rules.pro
